@@ -1,16 +1,8 @@
 import React, { useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  TeamOutlined,
-  DashboardOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { Link, useLocation } from "react-router-dom";
-import Reports from "../Reports";
+import LeadSource from "../LeadSource";
 import Sidebar from "../Sidebar";
 const { Header, Sider, Content } = Layout;
 const App = () => {
@@ -38,12 +30,12 @@ const App = () => {
         <Content
           className="site-layout-background"
           style={{
-            margin: "24px 16px",
-            padding: 24,
+            margin: 20,
+            padding: 15,
             minHeight: 280,
           }}
         >
-          <Reports />
+          <LeadSource />
         </Content>
       </Layout>
     </Layout>

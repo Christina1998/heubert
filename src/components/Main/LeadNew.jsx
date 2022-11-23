@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -7,19 +7,19 @@ import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
-} from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
-import Leads from '../Leads';
-import Sidebar from '../Sidebar';
+} from "@ant-design/icons";
+import { Layout, Menu } from "antd";
+import { Link, useLocation } from "react-router-dom";
+import Leads from "../Leads";
+import Sidebar from "../Sidebar";
 const { Header, Sider, Content } = Layout;
 const App = () => {
-    const location = useLocation();
-    console.log(location.pathname)
+  const location = useLocation();
+  console.log(location.pathname);
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout>
-      <Sidebar/>
+      <Sidebar />
       <Layout className="site-layout">
         <Header
           className="site-layout-background"
@@ -27,10 +27,13 @@ const App = () => {
             padding: 0,
           }}
         >
-          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-            className: 'trigger',
-            onClick: () => setCollapsed(!collapsed),
-          })}
+          {React.createElement(
+            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+            {
+              className: "trigger",
+              onClick: () => setCollapsed(!collapsed),
+            }
+          )}
         </Header>
         <Content
           className="site-layout-background"
@@ -39,7 +42,7 @@ const App = () => {
             minHeight: 280,
           }}
         >
-          <Leads/>
+          <Leads />
         </Content>
       </Layout>
     </Layout>
