@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "./Config/axios";
 import { Input, Layout, Space, Table, Tag } from "antd";
 // const { Header, Content, Footer } = Layout;
+import moment from "moment";
 
 const Leads = () => {
   const [lead, setLead] = useState("");
@@ -68,7 +69,9 @@ const Leads = () => {
       title: "Last Activity date",
       dataIndex: "last_activity_date",
       key: "last_activity_date",
-      sorter: (a, b) => a.last_activity_date - b.last_activity_date,
+      sorter: (a, b) =>
+        moment(a.last_activity_date).valueOf() -
+        moment(b.last_activity_date).valueOf(),
     },
   ];
 
