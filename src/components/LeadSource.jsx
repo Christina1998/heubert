@@ -8,7 +8,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const PieChart = ({ labelData }) => {
   const [leadSource, setLeadSource] = useState("");
   useEffect(() => {
-    console.log("LeadSource", labelData);
     const getLeads = async () => {
       const response = await axiosInstance.post("/lead-origin", {
         data: labelData,

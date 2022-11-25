@@ -28,7 +28,6 @@ ChartJS.register(
 const BarChart = () => {
   const [lead, setLead] = useState("");
   const [labelData, setlabelData] = useState("");
-  console.log(labelData, "000000");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,7 +72,6 @@ const BarChart = () => {
       },
     },
     onClick: async (c, i) => {
-      console.log("onClick");
       let leadData = await c.chart.config._config.data.labels[i[0].index];
       setlabelData(leadData);
       navigate("/reports");
@@ -111,7 +109,6 @@ const BarChart = () => {
           style={{ cursor: "pointer" }}
         />
       </div>
-      {console.log(labelData, "inBar")}
       {labelData ? <LeadSource labelData={labelData} /> : ""}
     </div>
   );
