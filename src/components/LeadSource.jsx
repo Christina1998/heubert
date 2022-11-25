@@ -5,14 +5,18 @@ import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = () => {
+const PieChart = ({ labelData }) => {
   const [leadSource, setLeadSource] = useState("");
   useEffect(() => {
+    console.log("LeadSource", labelData);
     const getLeads = async () => {
-      const response = await axiosInstance.get("/lead-origin");
+      const response = await axiosInstance.post("/lead-origin", {
+        data: labelData,
+        "Content-Type": "multipart/form-data",
+      });
       const rescon = await response?.data;
+      console.log("Raw Data", rescon);
       setLeadSource(await rescon);
-      console.log("Response", response?.data);
     };
     getLeads();
   }, []);

@@ -25,7 +25,6 @@ const Leads = () => {
       const response = await axiosInstance.get("/users");
       const rescon = await response?.data;
       setLead(await rescon);
-      console.log("Response", response?.data);
     };
     getLeads();
   }, []);

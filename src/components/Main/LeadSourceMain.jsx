@@ -7,7 +7,6 @@ import Sidebar from "../Sidebar";
 const { Header, Sider, Content } = Layout;
 const App = () => {
   const location = useLocation();
-  console.log(location.pathname);
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout>

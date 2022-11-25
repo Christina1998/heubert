@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axiosInstance from "./Config/axios";
+import LeadSource from "../components/LeadSource";
 
 import {
   Chart as ChartJS,
@@ -27,14 +28,13 @@ ChartJS.register(
 const BarChart = () => {
   const [lead, setLead] = useState("");
   const [labelData, setlabelData] = useState("");
-  const chartRef = useRef();
-  console.log("labelData", labelData);
+  console.log(labelData, "000000");
   const navigate = useNavigate();
 
   useEffect(() => {
     const getLeads = async () => {
       const response = await axiosInstance.get("/lead-source");
-      console.log("Response1234", response?.data);
+      // console.log("Response1234", response?.data);
       const rescon = await response?.data;
       setLead(await rescon);
     };
@@ -61,8 +61,6 @@ const BarChart = () => {
     ],
   };
 
-  console.log("--------------------", data);
-
   const options = {
     responsive: true,
     plugins: {
@@ -74,23 +72,13 @@ const BarChart = () => {
         text: "Bar Chart",
       },
     },
-    onClick: (c, i) => {
-      // history.push(`/lead-source/${labelData}`)
-      setlabelData(c.chart.config._config.data.labels[i[0].index]);
-      navigate(`/lead-source/${labelData}`);
-      console.log(
-        "Get the underlying label for click,",
-        c.chart.config._config.data.labels[i[0].index]
-      );
+    onClick: async (c, i) => {
+      console.log("onClick");
+      let leadData = await c.chart.config._config.data.labels[i[0].index];
+      setlabelData(leadData);
+      navigate("/reports");
     },
   };
-
-  // const ctx = document.getElementById('myChart');
-  // const myChart = new Chart(
-  //   ctx,
-  //   data
-
-  // )
 
   // const clickHandler = (click)=>{
   //   const points = myChart.getElementsAtEventForMode(click, 'nearest', {intersect: true}, true)
@@ -100,15 +88,15 @@ const BarChart = () => {
   //   }
   // }
 
-  // ctx.onClick = clickHandler;
-
-  // console.log("Document", document.getElementById())
-
-  // const onClick = (c,i) => {
-  //   const data = c.chart?.config._config.data.labels[i[0].index]
-  //   console.log('data', data)
-  //   console.log('Get the underlying label for click,', c.chart.config._config.data.labels[i[0].index]);
-  // }
+  // const onClick = async (c, i) => {
+  //   console.log("Chart", c);
+  //   const data = await c?.chart?.config._config.data.labels[i[0].index];
+  //   console.log("data", data);
+  //   console.log(
+  //     "Get the underlying label for click,",
+  //     c.chart.config._config.data.labels[i[0].index]
+  //   );
+  // };
 
   return (
     <div>
@@ -117,10 +105,14 @@ const BarChart = () => {
         <Bar
           options={options}
           data={data}
+          // onClick={(e, index) => onClick(e, index)}
           // if required to build the URL, you can
           // get datasetIndex and value index from an `elem`:
+          style={{ cursor: "pointer" }}
         />
       </div>
+      {console.log(labelData, "inBar")}
+      {labelData ? <LeadSource labelData={labelData} /> : ""}
     </div>
   );
 };
